@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>舞动版权 - 舞蹈作品保护平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", "微软雅黑", "PingFang SC", sans-serif;
+        }
+        body {
+            background-color: #f8f4e9;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+        /* 修改：添加图片Logo样式 */
+        .logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 190px; /* 控制Logo宽度 */
+            height: 190px; /* 控制Logo高度 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10; /* 确保Logo在最上层 */
+        }
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* 保持比例并完全显示 */
+        }
+        header {
+    	text-align: center;
+    	padding: 40px 0;
+    	background: white;
+    	border-radius: 10px;
+    	margin-bottom: 30px;
+    	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    	color: #333;
+	}
+	h1 {
+    	font-size: 2.5rem;
+    	margin-bottom: 15px;
+    	letter-spacing: 2px;
+    	color: #636fa4;
+	}
+	.subtitle {
+    	font-size: 1.2rem;
+    	opacity: 0.8;
+    	color: #555;
+	}
+        .main-content {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        .service-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #636fa4;
+        }
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .service-desc {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(to right, #636fa4, #e8cbc0);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-top: auto;
+        }
+        .btn:hover {
+            background: linear-gradient(to right, #e8cbc0, #636fa4);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* 子页面样式 */
+        .subpage {
+            display: none;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        .subpage h2 {
+            color: #636fa4;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            text-align: center;
+        }
+        .subpage p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        .back-btn {
+            display: block;
+            margin: 30px auto 0;
+            width: 200px;
+        }
+
+        /* 表单样式 */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #636fa4;
+        }
+        .form-group input, 
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        .form-group input[type="file"] {
+            padding: 5px;
+            background: #f9f9f9;
+        }
+        .form-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+        }
+        .checkbox-label {
+            display: inline-flex;
+            align-items: center;
+            font-weight: normal;
+        }
+        /* 新增：协议链接样式 */
+        .agreement-link {
+            color: #636fa4;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .agreement-link:hover {
+            opacity: 0.8;
+        }
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .submit-btn {
+            background: linear-gradient(to right, #636fa4, #e8cbc0);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .submit-btn:hover {
+            background: linear-gradient(to right, #e8cbc0, #636fa4);
+        }
+        
+        /* 修改后的：暂存按钮样式，颜色与“提交申请”按钮相同 */
+	.save-draft-btn {
+    	background: linear-gradient(to right, #636fa4, #e8cbc0); /* 与 submit-btn 相同 */
+    	color: white;
+    	border: none;
+    	padding: 12px 30px;
+    	border-radius: 30px;
+    	font-size: 1rem;
+    	cursor: pointer;
+    	transition: all 0.3s ease;
+    	margin-right: 10px; /* 与“提交申请”按钮之间留一点间距 */
+	}
+	.save-draft-btn:hover {
+    	background: linear-gradient(to right, #e8cbc0, #636fa4); /* 与 submit-btn:hover 相同 */
+	}
+
+        /* 参考资料样式 */
+        .references {
+            background-color: #f8f9fa;
+            border-left: 4px solid #636fa4;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .references h4 {
+            color: #636fa4;
+            margin-bottom: 10px;
+        }
+        .references ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            color: #555;
+        }
+        .references li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+          <div class="logo">
+            <img src="https://wangliting543.github.io/dance/logo.png" alt="Dance Copyright Agency Logo"> <!-- 替换为实际图片URL -->
+        </div>
+        <header>
+            <h1>舞动版权</h1>
+            <p class="subtitle">专业舞蹈作品版权保护与服务平台</p>
+        </header>
+
+        <!-- 主页面内容 -->
+        <div id="main-page">
+            <div class="main-content">
+                <div class="service-card" onclick="showSubpage('register')">
+                    <div class="service-icon">📝</div>
+                    <h3 class="service-title">版权代理注册与确权</h3>
+                    <p class="service-desc">为您的舞蹈作品提供专业的版权登记、确权服务，确保您的创作权益得到法律保护</p>
+                    <a class="btn">进入服务</a>
+                </div>
+                <div class="service-card" onclick="showSubpage('legal')">
+                    <div class="service-icon">⚖️</div>
+                    <h3 class="service-title">法律咨询与合规指导</h3>
+                    <p class="service-desc">专业法律团队为您提供舞蹈版权相关的法律咨询和合规性指导</p>
+                    <a class="btn">进入服务</a>
+                </div>
+                <div class="service-card" onclick="showSubpage('definition')">
+                    <div class="service-icon">🩰</div>
+                    <h3 class="service-title">作品动作界定</h3>
+                    <p class="service-desc">通过专业分析界定舞蹈动作的独创性，为版权保护提供技术支撑</p>
+                    <a class="btn">进入服务</a>
+                </div>
+                <div class="service-card" onclick="showSubpage('cooperation')">
+                    <div class="service-icon">🤝</div>
+                    <h3 class="service-title">商业合作与推广</h3>
+                    <p class="service-desc">为优秀舞蹈作品提供商业合作机会和推广平台，实现艺术价值最大化</p>
+                    <a class="btn">进入服务</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 版权代理注册与确权子页面 -->
+        <div id="register-subpage" class="subpage">
+            <h2>版权代理注册与确权</h2>
+            <form>
+                <div class="form-group">
+                    <label for="name">姓名/机构名称</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact">联系方式</label>
+                    <input type="text" id="contact" name="contact" required>
+                </div>
+                <div class="form-group">
+                    <label for="work-name">作品名称</label>
+                    <input type="text" id="work-name" name="work_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="dance-type">舞蹈类型</label>
+                    <select id="dance-type" name="dance_type" required>
+                        <option value="">请选择舞蹈类型</option>
+                        <option value="古典舞">古典舞</option>
+                        <option value="民族民间舞">民族民间舞</option>
+                        <option value="芭蕾舞">芭蕾舞</option>
+                        <option value="现代舞">现代舞</option>
+                        <option value="当代舞">当代舞</option>
+                        <option value="街舞">街舞</option>
+                        <option value="国标舞">国标舞</option>
+                        <option value="爵士舞">爵士舞</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="video-upload">上传舞蹈视频</label>
+                    <input type="file" id="video-upload" name="video_file" accept="video/mp4,video/mov,video/avi,video/mkv" required>
+                    <small style="color: #666;">支持格式：MP4、MOV、AVI、MKV，建议不超过500MB</small>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="original_work" value="yes" required>
+                        本人确认该舞蹈作品为原创，不侵犯他人知识产权
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="agree_service_agreement" value="yes" required>
+                        已阅读并同意<a href="#service-agreement" target="_blank" class="agreement-link">《舞动版权服务协议》</a>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="agree_copyright_law" value="yes" required>
+                        已阅读并同意<a href="#copyright-law" target="_blank" class="agreement-link">《中华人民共和国著作权法》</a>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="details">服务需求详情</label>
+                    <textarea id="details" name="details" required></textarea>
+                </div>
+                <!-- 添加“暂存”按钮 -->
+                <button type="button" class="save-draft-btn">暂存</button>
+                <button type="submit" class="submit-btn">提交申请</button>
+            </form>
+            <button class="btn back-btn" onclick="backToMain()">返回首页</button>
+        </div>
+
+        <!-- 法律咨询与合规指导子页面 -->
+        <div id="legal-subpage" class="subpage">
+            <h2>法律咨询与合规指导</h2>
+            <form>
+                <div class="form-group">
+                    <label for="legal-name">姓名/机构名称</label>
+                    <input type="text" id="legal-name" name="legal-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="legal-contact">联系方式</label>
+                    <input type="text" id="legal-contact" name="legal-contact" required>
+                </div>
+                <div class="form-group">
+                    <label for="legal-work-name">作品名称</label>
+                    <input type="text" id="legal-work-name" name="work_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="legal-dance-type">舞蹈类型</label>
+                    <select id="legal-dance-type" name="dance_type" required>
+                        <option value="">请选择舞蹈类型</option>
+                        <option value="古典舞">古典舞</option>
+                        <option value="民族民间舞">民族民间舞</option>
+                        <option value="芭蕾舞">芭蕾舞</option>
+                        <option value="现代舞">现代舞</option>
+                        <option value="当代舞">当代舞</option>
+                        <option value="街舞">街舞</option>
+                        <option value="国标舞">国标舞</option>
+                        <option value="爵士舞">爵士舞</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+                <!-- 新增：咨询问题类型 -->
+                <div class="form-group">
+                    <label for="legal-issue-type">咨询问题类型</label>
+                    <select id="legal-issue-type" name="issue_type" required>
+                        <option value="">请选择咨询类型</option>
+                        <option value="版权归属">版权归属</option>
+                        <option value="侵权认定">侵权认定</option>
+                        <option value="许可与授权">许可与授权</option>
+                        <option value="合同审查">合同审查</option>
+                        <option value="维权策略">维权策略</option>
+                        <option value="国际版权">国际版权</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="legal-details">咨询问题详情</label>
+                    <textarea id="legal-details" name="legal-details" required></textarea>
+                </div>
+
+                <!-- ✅ 添加参考依据模块 -->
+                <div class="references">
+                    <h4>参考依据</h4>
+                    <ul>
+                        <li>《中华人民共和国著作权法》（2020年修订）</li>
+                        <li>《著作权法实施条例》</li>
+                        <li>《作品自愿登记试行办法》</li>
+                        <li>《关于审理著作权民事纠纷案件适用法律若干问题的解释》</li>
+                        <li>《舞蹈作品版权登记指南》（中国版权保护中心）</li>
+                        <li>《艺术作品独创性认定标准》（行业参考）</li>
+                    </ul>
+                </div>
+
+                <!-- 添加“暂存”按钮 -->
+                <button type="button" class="save-draft-btn">暂存</button>
+                <button type="submit" class="submit-btn">提交咨询</button>
+            </form>
+            <button class="btn back-btn" onclick="backToMain()">返回首页</button>
+        </div>
+
+        <!-- 作品动作界定子页面 -->
+        <div id="definition-subpage" class="subpage">
+            <h2>作品动作界定</h2>
+            <form>
+                <div class="form-group">
+                    <label for="dance-name">姓名/机构名称</label>
+                    <input type="text" id="dance-name" name="dance-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="dance-contact">联系方式</label>
+                    <input type="text" id="dance-contact" name="dance-contact" required>
+                </div>
+                <div class="form-group">
+                    <label for="def-work-name">作品名称</label>
+                    <input type="text" id="def-work-name" name="work_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="def-dance-type">舞蹈类型</label>
+                    <select id="def-dance-type" name="dance_type" required>
+                        <option value="">请选择舞蹈类型</option>
+                        <option value="古典舞">古典舞</option>
+                        <option value="民族民间舞">民族民间舞</option>
+                        <option value="芭蕾舞">芭蕾舞</option>
+                        <option value="现代舞">现代舞</option>
+                        <option value="当代舞">当代舞</option>
+                        <option value="街舞">街舞</option>
+                        <option value="国标舞">国标舞</option>
+                        <option value="爵士舞">爵士舞</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="dance-details">舞蹈作品描述及界定需求</label>
+                    <textarea id="dance-details" name="dance-details" required></textarea>
+                </div>
+                <!-- 添加“暂存”按钮 -->
+                <button type="button" class="save-draft-btn">暂存</button>
+                <button type="submit" class="submit-btn">提交申请</button>
+            </form>
+            <button class="btn back-btn" onclick="backToMain()">返回首页</button>
+        </div>
+
+        <!-- 商业合作与推广子页面 -->
+        <div id="cooperation-subpage" class="subpage">
+            <h2>商业合作与推广</h2>
+            <form>
+                <div class="form-group">
+                    <label for="coop-name">姓名/机构名称</label>
+                    <input type="text" id="coop-name" name="coop-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="coop-contact">联系方式</label>
+                    <input type="text" id="coop-contact" name="coop-contact" required>
+                </div>
+                <div class="form-group">
+                    <label for="coop-work-name">作品名称</label>
+                    <input type="text" id="coop-work-name" name="work_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="coop-dance-type">舞蹈类型</label>
+                    <select id="coop-dance-type" name="dance_type" required>
+                        <option value="">请选择舞蹈类型</option>
+                        <option value="古典舞">古典舞</option>
+                        <option value="民族民间舞">民族民间舞</option>
+                        <option value="芭蕾舞">芭蕾舞</option>
+                        <option value="现代舞">现代舞</option>
+                        <option value="当代舞">当代舞</option>
+                        <option value="街舞">街舞</option>
+                        <option value="国标舞">国标舞</option>
+                        <option value="爵士舞">爵士舞</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="coop-partners">意向合作单位（可填写最多三个）</label>
+                    <input type="text" id="coop-partners" name="partners" placeholder="例如：XX剧院、XX艺术节、XX文化公司" required>
+                    <small style="color: #666;">请用顿号“、”或逗号“,”分隔多个单位</small>
+                </div>
+                <div class="form-group">
+                    <label for="coop-details">合作意向及作品介绍</label>
+                    <textarea id="coop-details" name="coop-details" required></textarea>
+                </div>
+                <!-- 添加“暂存”按钮 -->
+                <button type="button" class="save-draft-btn">暂存</button>
+                <button type="submit" class="submit-btn">提交申请</button>
+            </form>
+            <button class="btn back-btn" onclick="backToMain()">返回首页</button>
+        </div>
+
+        <footer>
+            <p>© 2025 舞动版权 版权所有 | 专业舞蹈作品版权保护平台</p>
+        </footer>
+    </div>
+
+    <script>
+        // 显示子页面函数
+        function showSubpage(pageId) {
+            document.getElementById('main-page').style.display = 'none';
+            document.getElementById(pageId + '-subpage').style.display = 'block';
+        }
+        // 返回主页面函数
+        function backToMain() {
+            document.getElementById('main-page').style.display = 'block';
+            const subpages = document.querySelectorAll('.subpage');
+            subpages.forEach(page => {
+                page.style.display = 'none';
+            });
+        }
+        // TODO: 实现暂存功能
+        // 例如，可以添加点击事件，将表单数据保存到 localStorage
+        // document.querySelectorAll('.save-draft-btn').forEach(button => {
+        //     button.addEventListener('click', function() {
+        //         const form = this.closest('form');
+        //         const formData = new FormData(form);
+        //         const data = {};
+        //         for (let [key, value] of formData.entries()) {
+        //             data[key] = value;
+        //         }
+        //         // 假设每个子页面有唯一的ID
+        //         const pageId = form.closest('.subpage').id;
+        //         localStorage.setItem(`draft_${pageId}`, JSON.stringify(data));
+        //         alert('已暂存！');
+        //     });
+        // });
+    </script>
+</body>
+</html>
