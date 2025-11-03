@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Microsoft YaHei", "微软雅黑", "PingFang SC", sans-serif;
+            font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
         }
         body {
             background-color: #f8f4e9;
@@ -30,9 +30,7 @@
             font-weight: bold;
             color: #636fa4;
         }
-        .logo span:first-child {
-            color: #e8cbc0;
-        }
+        .logo span:first-child { color: #e8cbc0; }
         header {
             text-align: center;
             padding: 40px 0;
@@ -42,15 +40,20 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             color: white;
         }
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
+        h1 { font-size: 2.5rem; margin-bottom: 15px; letter-spacing: 2px; }
+        .subtitle { font-size: 1.2rem; opacity: 0.9; }
+
+        /* 页面容器 */
+        #main-page, #register-subpage, #legal-subpage, #definition-subpage, #cooperation-subpage, #success-page {
+            display: none;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
         }
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
+        .active { display: block; }
+
         .main-content {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -71,24 +74,10 @@
             align-items: center;
             justify-content: center;
         }
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-        .service-icon {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: #636fa4;
-        }
-        .service-title {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        .service-desc {
-            color: #666;
-            margin-bottom: 20px;
-        }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .service-icon { font-size: 3.5rem; margin-bottom: 20px; color: #636fa4; }
+        .service-title { font-size: 1.5rem; margin-bottom: 15px; color: #333; }
+        .service-desc { color: #666; margin-bottom: 20px; }
         .btn {
             display: inline-block;
             padding: 12px 30px;
@@ -102,50 +91,18 @@
             text-decoration: none;
             margin-top: auto;
         }
-        .btn:hover {
-            background: linear-gradient(to right, #e8cbc0, #636fa4);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-            font-size: 0.9rem;
-        }
-        /* 子页面样式 */
-        .subpage {
-            display: none;
-            padding: 40px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 30px;
-        }
+        .btn:hover { background: linear-gradient(to right, #e8cbc0, #636fa4); }
+
+        /* 表单样式 */
         .subpage h2 {
             color: #636fa4;
             margin-bottom: 20px;
             font-size: 2rem;
             text-align: center;
         }
-        .subpage p {
-            margin-bottom: 20px;
-            line-height: 1.8;
-        }
-        .back-btn {
-            display: block;
-            margin: 30px auto 0;
-            width: 200px;
-        }
-        /* 中国风装饰元素 */
-        .chinese-pattern {
-            height: 20px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="20" viewBox="0 0 100 20"><path d="M0,10 Q25,20 50,10 T100,10" fill="none" stroke="%23636fa4" stroke-width="2"/></svg>') repeat-x;
-            margin: 30px 0;
-            opacity: 0.6;
-        }
-        /* 表单样式 */
         .form-group {
             margin-bottom: 20px;
+            position: relative;
         }
         .form-group label {
             display: block;
@@ -153,13 +110,22 @@
             font-weight: bold;
             color: #636fa4;
         }
-        .form-group input, 
-        .form-group textarea {
+        .form-group input, .form-group textarea, .form-group select {
             width: 100%;
             padding: 12px;
             border: 1px solid #ddd;
             border-radius: 6px;
             font-size: 1rem;
+        }
+        .form-group input[type="file"] { padding: 5px; background: #f9f9f9; }
+        .form-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+        }
+        .checkbox-label {
+            display: inline-flex;
+            align-items: center;
+            font-weight: normal;
         }
         .form-group textarea {
             min-height: 120px;
@@ -173,25 +139,91 @@
             border-radius: 30px;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
         }
         .submit-btn:hover {
             background: linear-gradient(to right, #e8cbc0, #636fa4);
+        }
+
+        /* 错误提示 */
+        .error-message {
+            color: #d32f2f;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+        .error-message.show {
+            display: block;
+        }
+
+        /* 成功页面样式 */
+        #success-page {
+            text-align: center;
+            padding: 60px 40px;
+        }
+        .success-icon {
+            font-size: 4rem;
+            color: #4caf50;
+            margin-bottom: 20px;
+        }
+        .success-title {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .app-id-container {
+            margin: 25px 0;
+        }
+        .app-id-label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .app-id {
+            background: #f0f7ff;
+            border: 1px dashed #636fa4;
+            padding: 15px;
+            font-family: monospace;
+            font-size: 1.2rem;
+            color: #636fa4;
+            border-radius: 6px;
+            display: inline-block;
+            min-width: 300px;
+        }
+        .notice-text {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        .back-btn {
+            background: #636fa4;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="logo">
-            <span>Dance</span><span>agency</span><span>copyright</span>
-        </div>
+        <div class="logo"><span>Dance</span><span>agency</span><span>copyright</span></div>
+
         <header>
             <h1>舞动版权</h1>
             <p class="subtitle">专业舞蹈作品版权保护与服务平台</p>
         </header>
-        <div class="chinese-pattern"></div>
-        <!-- 主页面内容 -->
-        <div id="main-page">
+
+        <!-- 主页面 -->
+        <div id="main-page" class="active">
             <div class="main-content">
                 <div class="service-card" onclick="showSubpage('register')">
                     <div class="service-icon">📝</div>
@@ -219,108 +251,271 @@
                 </div>
             </div>
         </div>
-        <!-- 版权代理注册与确权子页面 -->
+
+        <!-- 版权注册表单 -->
         <div id="register-subpage" class="subpage">
             <h2>版权代理注册与确权</h2>
-            <div class="chinese-pattern"></div>
-            <form>
+            <form id="register-form">
                 <div class="form-group">
                     <label for="name">姓名/机构名称</label>
                     <input type="text" id="name" name="name" required>
+                    <div class="error-message">请填写姓名/机构名称</div>
                 </div>
                 <div class="form-group">
                     <label for="contact">联系方式</label>
                     <input type="text" id="contact" name="contact" required>
+                    <div class="error-message">请填写联系方式</div>
+                </div>
+                <div class="form-group">
+                    <label for="work-name">作品名称</label>
+                    <input type="text" id="work-name" name="work_name" required>
+                    <div class="error-message">请填写作品名称</div>
+                </div>
+                <div class="form-group">
+                    <label for="dance-type">舞蹈类型</label>
+                    <select id="dance-type" name="dance_type" required>
+                        <option value="">请选择舞蹈类型</option>
+                        <option value="古典舞">古典舞</option>
+                        <option value="民族民间舞">民族民间舞</option>
+                        <option value="芭蕾舞">芭蕾舞</option>
+                        <option value="现代舞">现代舞</option>
+                        <option value="当代舞">当代舞</option>
+                        <option value="街舞">街舞</option>
+                        <option value="国标舞">国标舞</option>
+                        <option value="爵士舞">爵士舞</option>
+                        <option value="其他">其他</option>
+                    </select>
+                    <div class="error-message">请选择舞蹈类型</div>
+                </div>
+                <div class="form-group">
+                    <label for="video-upload">上传舞蹈视频</label>
+                    <input type="file" id="video-upload" name="video_file" accept="video/*" required>
+                    <div class="error-message">请上传舞蹈视频</div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="original_work" value="yes" required>
+                        本人确认该舞蹈作品为原创，不侵犯他人知识产权及合法权益
+                    </label>
+                    <div class="error-message">请勾选确认声明</div>
                 </div>
                 <div class="form-group">
                     <label for="details">服务需求详情</label>
                     <textarea id="details" name="details" required></textarea>
+                    <div class="error-message">请填写服务需求详情</div>
                 </div>
                 <button type="submit" class="submit-btn">提交申请</button>
             </form>
             <button class="btn back-btn" onclick="backToMain()">返回首页</button>
         </div>
-        <!-- 法律咨询与合规指导子页面 -->
+
+        <!-- 法律咨询服务表单 -->
         <div id="legal-subpage" class="subpage">
             <h2>法律咨询与合规指导</h2>
-            <div class="chinese-pattern"></div>
-            <form>
+            <form id="legal-form">
                 <div class="form-group">
                     <label for="legal-name">姓名/机构名称</label>
-                    <input type="text" id="legal-name" name="legal-name" required>
+                    <input type="text" id="legal-name" name="name" required>
+                    <div class="error-message">请填写姓名/机构名称</div>
                 </div>
                 <div class="form-group">
                     <label for="legal-contact">联系方式</label>
-                    <input type="text" id="legal-contact" name="legal-contact" required>
+                    <input type="text" id="legal-contact" name="contact" required>
+                    <div class="error-message">请填写联系方式</div>
                 </div>
                 <div class="form-group">
-                    <label for="legal-details">咨询问题详情</label>
-                    <textarea id="legal-details" name="legal-details" required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">提交咨询</button>
-            </form>
-            <button class="btn back-btn" onclick="backToMain()">返回首页</button>
-        </div>
-        <!-- 作品动作界定子页面 -->
-        <div id="definition-subpage" class="subpage">
-            <h2>作品动作界定</h2>
-            <div class="chinese-pattern"></div>
-            <form>
-                <div class="form-group">
-                    <label for="dance-name">姓名/机构名称</label>
-                    <input type="text" id="dance-name" name="dance-name" required>
-                </div>
-                <div class="form-group">
-                    <label for="dance-contact">联系方式</label>
-                    <input type="text" id="dance-contact" name="dance-contact" required>
-                </div>
-                <div class="form-group">
-                    <label for="dance-details">舞蹈作品描述及界定需求</label>
-                    <textarea id="dance-details" name="dance-details" required></textarea>
+                    <label for="legal-issue">咨询问题</label>
+                    <textarea id="legal-issue" name="issue" required></textarea>
+                    <div class="error-message">请填写咨询问题</div>
                 </div>
                 <button type="submit" class="submit-btn">提交申请</button>
             </form>
             <button class="btn back-btn" onclick="backToMain()">返回首页</button>
         </div>
-        <!-- 商业合作与推广子页面 -->
+
+        <!-- 作品动作界定表单 -->
+        <div id="definition-subpage" class="subpage">
+            <h2>作品动作界定</h2>
+            <form id="definition-form">
+                <div class="form-group">
+                    <label for="def-name">姓名/机构名称</label>
+                    <input type="text" id="def-name" name="name" required>
+                    <div class="error-message">请填写姓名/机构名称</div>
+                </div>
+                <div class="form-group">
+                    <label for="def-contact">联系方式</label>
+                    <input type="text" id="def-contact" name="contact" required>
+                    <div class="error-message">请填写联系方式</div>
+                </div>
+                <div class="form-group">
+                    <label for="def-work-name">作品名称</label>
+                    <input type="text" id="def-work-name" name="work_name" required>
+                    <div class="error-message">请填写作品名称</div>
+                </div>
+                <div class="form-group">
+                    <label for="def-video">上传舞蹈视频</label>
+                    <input type="file" id="def-video" name="video_file" accept="video/*" required>
+                    <div class="error-message">请上传舞蹈视频</div>
+                </div>
+                <div class="form-group">
+                    <label for="def-details">界定需求说明</label>
+                    <textarea id="def-details" name="details" required></textarea>
+                    <div class="error-message">请填写界定需求说明</div>
+                </div>
+                <button type="submit" class="submit-btn">提交申请</button>
+            </form>
+            <button class="btn back-btn" onclick="backToMain()">返回首页</button>
+        </div>
+
+        <!-- 商业合作表单 -->
         <div id="cooperation-subpage" class="subpage">
             <h2>商业合作与推广</h2>
-            <div class="chinese-pattern"></div>
-            <form>
+            <form id="cooperation-form">
                 <div class="form-group">
                     <label for="coop-name">姓名/机构名称</label>
-                    <input type="text" id="coop-name" name="coop-name" required>
+                    <input type="text" id="coop-name" name="name" required>
+                    <div class="error-message">请填写姓名/机构名称</div>
                 </div>
                 <div class="form-group">
                     <label for="coop-contact">联系方式</label>
-                    <input type="text" id="coop-contact" name="coop-contact" required>
+                    <input type="text" id="coop-contact" name="contact" required>
+                    <div class="error-message">请填写联系方式</div>
                 </div>
                 <div class="form-group">
-                    <label for="coop-details">合作意向及作品介绍</label>
-                    <textarea id="coop-details" name="coop-details" required></textarea>
+                    <label for="coop-project">合作项目</label>
+                    <input type="text" id="coop-project" name="project" required>
+                    <div class="error-message">请填写合作项目</div>
+                </div>
+                <div class="form-group">
+                    <label for="coop-details">合作需求描述</label>
+                    <textarea id="coop-details" name="details" required></textarea>
+                    <div class="error-message">请填写合作需求描述</div>
                 </div>
                 <button type="submit" class="submit-btn">提交申请</button>
             </form>
             <button class="btn back-btn" onclick="backToMain()">返回首页</button>
         </div>
-        <footer>
-            <p>© 2025 舞动版权 版权所有 | 专业舞蹈作品版权保护平台</p>
-        </footer>
+
+        <!-- 成功提交页面 -->
+        <div id="success-page">
+            <div class="success-icon">✅</div>
+            <h2 class="success-title" id="success-title">提交成功！</h2>
+            <p class="notice-text" id="success-notice">您的申请已成功提交，请等待通知。<br>我们将在3-5个工作日内与您联系。</p>
+            <div class="app-id-container" id="app-id-container" style="display:none;">
+                <span class="app-id-label">您的申请ID号：</span>
+                <div class="app-id" id="app-id-display"></div>
+            </div>
+            <button class="back-btn" onclick="backToMain()">返回首页</button>
+        </div>
+
+        <footer>© 2025 舞动版权 版权所有</footer>
     </div>
+
     <script>
-        // 显示子页面函数
-        function showSubpage(pageId) {
-            document.getElementById('main-page').style.display = 'none';
-            document.getElementById(pageId + '-subpage').style.display = 'block';
-        }
-        // 返回主页面函数
-        function backToMain() {
-            document.getElementById('main-page').style.display = 'block';
-            const subpages = document.querySelectorAll('.subpage');
-            subpages.forEach(page => {
-                page.style.display = 'none';
+        // 显示对应子页面
+        function showSubpage(id) {
+            document.querySelectorAll('.subpage, #main-page, #success-page').forEach(el => {
+                el.classList.remove('active');
+                el.style.display = 'none';
             });
+            document.getElementById(id + '-subpage').classList.add('active');
+            document.getElementById(id + '-subpage').style.display = 'block';
         }
+
+        // 返回首页
+        function backToMain() {
+            document.querySelectorAll('.subpage, #success-page').forEach(el => {
+                el.classList.remove('active');
+                el.style.display = 'none';
+            });
+            document.getElementById('main-page').classList.add('active');
+            document.getElementById('main-page').style.display = 'block';
+        }
+
+        // 生成唯一申请ID
+        function generateAppId() {
+            return 'DANCE-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substr(2,4).toUpperCase();
+        }
+
+        // 验证并收集表单数据
+        function validateAndCollect(form) {
+            let data = {};
+            let isValid = true;
+
+            form.querySelectorAll('[required]').forEach(input => {
+                const err = input.parentElement.querySelector('.error-message');
+                if (input.type === 'checkbox') {
+                    if (!input.checked) {
+                        err.classList.add('show');
+                        isValid = false;
+                    } else {
+                        err.classList.remove('show');
+                        data[input.name] = input.value;
+                    }
+                } else {
+                    if (!input.value.trim()) {
+                        err.classList.add('show');
+                        isValid = false;
+                    } else {
+                        err.classList.remove('show');
+                        data[input.name] = input.value;
+                    }
+                }
+            });
+
+            return isValid ? data : null;
+        }
+
+        // 显示成功页面
+        function showSuccessPage(isRegister, appId = '') {
+            document.querySelectorAll('#main-page, .subpage').forEach(el => {
+                el.classList.remove('active');
+                el.style.display = 'none';
+            });
+
+            const titleEl = document.getElementById('success-title');
+            const noticeEl = document.getElementById('success-notice');
+            const idContainer = document.getElementById('app-id-container');
+            const idDisplay = document.getElementById('app-id-display');
+
+            if (isRegister && appId) {
+                titleEl.textContent = '您已成功提交！';
+                noticeEl.innerHTML = '感谢您选择舞动版权服务，我们已收到您的申请信息。<br>请等待我们的工作人员与您联系，审核进度可通过申请ID查询。';
+                idContainer.style.display = 'block';
+                idDisplay.textContent = appId;
+            } else {
+                titleEl.textContent = '提交成功！';
+                noticeEl.textContent = '您的申请已成功提交，请等待通知。我们将在3-5个工作日内与您联系。';
+                idContainer.style.display = 'none';
+            }
+
+            document.getElementById('success-page').classList.add('active');
+            document.getElementById('success-page').style.display = 'block';
+        }
+
+        // 绑定所有表单事件
+        document.addEventListener('DOMContentLoaded', () => {
+            // 版权注册表单
+            document.getElementById('register-form')?.addEventListener('submit', e => {
+                e.preventDefault();
+                const data = validateAndCollect(e.target);
+                if (data) {
+                    const appId = generateAppId();
+                    showSuccessPage(true, appId);
+                }
+            });
+
+            // 其他三个表单统一处理
+            ['legal-form', 'definition-form', 'cooperation-form'].forEach(formId => {
+                document.getElementById(formId)?.addEventListener('submit', e => {
+                    e.preventDefault();
+                    const data = validateAndCollect(e.target);
+                    if (data) {
+                        showSuccessPage(false);
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
